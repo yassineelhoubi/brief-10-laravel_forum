@@ -25,10 +25,9 @@ use App\Http\Controllers\DashboardController;
  */
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');
-
-Route::get('/dashboard' ,[DashboardController::class , 'index'] )->name('dashboard')->middleware('auth');
+Route::get('/dashboard' ,[DashboardController::class , 'index'] )->name('dashboard')->middleware('is_user');
 
 /* POST */
 Route::get('/posts' , [PostController::class , 'index'])->name('posts');

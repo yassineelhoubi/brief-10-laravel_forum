@@ -19,6 +19,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
 
 <body class="bg-light">
@@ -30,7 +31,19 @@
                         <a href="{{ route('home')}}" class="p-3  ">Home</a>
                     </li>
                     <li>
+
+                        @guest
                         <a href="{{ route('dashboard')}}" class="p-3">Dashboard</a>
+                        @endguest
+                        @auth
+                        @if (auth()->user()->is_admin === 1)
+                        <a href="{{ route('admin.home')}}" class="p-3">Dashboard</a>
+                        @else
+                        <a href="{{ route('dashboard')}}" class="p-3">Dashboard</a>
+                        @endif
+                        @endauth
+
+
                     </li>
                     <li>
                         <a href="{{ route ('posts')}}" class="p-3">Post</a>
